@@ -25,3 +25,11 @@ bool multiplos(pv a, pv b){//retorna true false se os vetores forem multiplos en
 pv perp_vec(pv u){//retorna um vetor perpendicular a u
 	return pv(u.y, -u.x);
 }
+
+double norma(pv u){
+	return sqrt(dot(u, u));
+}
+
+pv unit_vec(pv u){
+	return u*(1.0/norma(u));
+}

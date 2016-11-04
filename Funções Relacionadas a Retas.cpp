@@ -40,18 +40,13 @@ int line_intersection(line l1, line l2, pv& c){// retorna 0 se as retas se cruza
 	
 }
 
-bool center_circle(pv o, pv p, pv q, pv &c){
+line bissetriz(pv a, pv o, pv c){
+	pv u = a-o, v = c-o;
 	
-	if(colinear(o, p, q)) return false;
+	u = unit_vec(u);
+	v = unit_vec(v);
 	
-	pv meio_op = o + ((p-o)*0.5);
-	pv perp_op = perp_vec(p-o);
-	line l1 = line(meio_op, perp_op);//mediatriz do segmento op
-	
-	pv meio_pq = p + ((q-p)*0.5);
-	pv perp_pq = perp_vec(q-p);
-	line l2 = line(meio_pq, perp_pq);//mediatriz do segmento pq
-	
-	line_intersection(l1, l2, c);
-	return true;
+	u = u+v;
+	return line(o, u);
 }
+
