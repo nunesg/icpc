@@ -21,3 +21,10 @@ struct line{
 	line(){p0=vec=pv();}
 	line(pv a, pv u) : p0(a), vec(u) {}
 };
+
+
+struct seg{//segmento de reta
+	pv a, b;
+	seg(){a=b=pv();}
+	seg(pv i, pv j) : a(i), b(j) {}
+};

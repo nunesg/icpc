@@ -3,6 +3,14 @@ double dist_line(pv p, pv a, pv b){//distancia de p à reta formada por a e b
 	return fabs( cross(p-a, b-a) ) / dist(a, b);
 }
 
+double dist_seg(pv p, seg ab){//distancia de p ao segmento ab
+	pv a = ab.a, b = ab.b;
+	double u = u = dot(p-a, b-a) / dot(b-a, b-a);
+	if(u<=0.0) return dist(p, a);
+	if(u>=1.0) return dist(p, b);
+	return dist_line(p, a, b);
+}
+
 pv projecao(pv p, pv a, pv b){//projecao de p na reta ab
 	double u = dot(p-a, b-a) / dot(b-a, b-a);
 	return a + ( (b-a)*u );
@@ -48,5 +56,10 @@ line bissetriz(pv a, pv o, pv c){
 	
 	u = u+v;
 	return line(o, u);
+}
+
+line mediatriz(pv a, pv b){
+	pv v = unit_vec( perp_vec(b-a) );
+	return line(a+((b-a)*0.5), v );
 }
 
