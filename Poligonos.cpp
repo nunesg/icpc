@@ -1,3 +1,16 @@
+
+
+
+
+/*
+ * 				PRINCIPAIS FUNCOES DE POLIGONOS
+ * 
+ */
+
+
+
+
+
 /*
   considere os poligonos com os vertices em sentido anti-horario e P[0] == P[n-1]
   exceto quando especificado
@@ -13,6 +26,10 @@ double perimetro(){
 	return ans;
 }
 
+
+
+
+
 double area(){
 	double ans=0.0;
 	for(int i=0; i<P.size()-1; i++){
@@ -20,6 +37,9 @@ double area(){
 	}
 	return fabs(ans)*0.5;
 }
+
+
+
 
 bool is_convex(){
 	
@@ -34,19 +54,26 @@ bool is_convex(){
 	
 }
 
+
+
+
 bool inside_polygon(pv p){//funciona pra poligono concavo e convexo
 	pv u, v;
 	int ans = 0;
 
+	
 	for(int i=0, j=P.size()-1; i<P.size(); j = i++){
 		u = P[i]; v = P[j];
 		if(u.y > v.y) swap(u, v);//u e o mais baixo, e v o mais alto
 		
-		if(cross(p-v, u-v) == 0.0 && dot(p-v, u-v)/dot(u-v, u-v) >= 0.0 && dot(p-v, u-v)/dot(u-v, u-v) <= 1.0) return true;//trata pontos sobre arestas horizontais
+		if(cross(p-v, u-v) == 0.0 && dot(p-v, u-v)/dot(u-v, u-v) >= 0.0   &&
+		   dot(p-v, u-v)/dot(u-v, u-v) <= 1.0)     return true;//trata pontos sobre arestas horizontais
+		
+		
+		
 		if(u.y == v.y) continue;
 		
 		if( (p.y >= u.y && p.y < v.y)  &&  cross(p-v, u-v) >= 0.0) {			
-			//~ printf("oi\n");
 			ans^=1;
 		}
 		
@@ -55,8 +82,14 @@ bool inside_polygon(pv p){//funciona pra poligono concavo e convexo
 }
 
 
+
+
+
 vector<pv> cutPolygon(pv a, pv b) {//corta o poligono P pela reta ab, e retorna a parte esquerda
+
 	vector<pv> LSIDE;
+
+
 	for (int i = 0; i < (int)Q.size(); i++) {
 		
 		double left1 = cross(b-a, P[i]-a), left2 = 0;
@@ -70,18 +103,23 @@ vector<pv> cutPolygon(pv a, pv b) {//corta o poligono P pela reta ab, e retorna 
 			line_intersection(line(P[i], P[i+1]-P[i]), line(a, b-a),  c);
 			LSIDE.push_back(c);
 		}
-	}
-	
+	}	
 	if (!LSIDE.empty() && !(LSIDE.back() == LSIDE.front()))    LSIDE.push_back(LSIDE.front());//P[0] == P[n-1]
 	
 	return LSIDE;
 }
+
+
+
+
 
 void ConvexHull(){//substitui o vetor P pela convex hull. se nao quiser modificar o vetor P, basta retornar a convex hull
 	
 	vector<int> d, u;
 	d.resize(n+1); u.resize(n+1);
 	int i, j=i=0;
+
+
 	for(int k=0; k<n; k++){
 		
 		while(i>1 && ccw(P[u[i-2]], P[u[i-1]], P[k])) i--;
@@ -89,6 +127,8 @@ void ConvexHull(){//substitui o vetor P pela convex hull. se nao quiser modifica
 		u[i++] = k;
 		d[j++] = k;
 	}
+
+
 	vector<pv> CH;
 	for(int k=0; k<j; k++){
 		CH.push_back(P[d[k]]);
@@ -98,6 +138,10 @@ void ConvexHull(){//substitui o vetor P pela convex hull. se nao quiser modifica
 	}
 	P = CH;
 }
+
+
+
+
 
 pv center_mass(){//retorna o centro de massa do poligono
 	

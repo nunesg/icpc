@@ -1,3 +1,12 @@
+
+
+/*
+ * 
+ * 			DISTANCIAS E ANGULOS
+ * 
+ */
+
+
 double dist(pv a, pv b){//distancia euclidiana
 	//a e b sao pontos
 	return hypot(a.x - b.x, a.y - b.y);

@@ -1,3 +1,12 @@
+
+/*
+ * 				STRUCTS DE RETA E SEGMENTO DE RETA
+ * 
+ */
+
+
+
+
 struct line{
 	/*
 	
@@ -21,6 +30,8 @@ struct line{
 	line(){p0=vec=pv();}
 	line(pv a, pv u) : p0(a), vec(u) {}
 };
+
+
 
 
 struct seg{//segmento de reta
